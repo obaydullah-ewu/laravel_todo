@@ -31,17 +31,6 @@ class TaskController extends Controller
         }
 
 
-
-
-        if (Auth::user()->role_as == 1)
-        {
-            $data['tasks'] = Task::where(function ($q) use ($status){
-                if ($status || $status == "0"){
-                    $q->whereStatus($status);
-                }
-            })->whereNotNull('assigned_user_id')->paginate(10);
-        }
-
         $data['users'] = User::all();
         return view('user.task.list')->with($data);
     }
