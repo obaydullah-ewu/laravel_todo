@@ -11,7 +11,8 @@
     </div>
     <div class="row">
         @forelse(@$tasks as $task)
-            @if(Auth::user()->id == $task->user_id || @$task->status == 1)
+
+            @if(Auth::user()->id == $task->assigned_user_id || @$task->status == 1)
                 <div class="col-md-4">
                     <div class="card border-success mb-3" style="max-width: 18rem;">
                         <div class="card-header bg-transparent border-success"><small>Assigend for: </small>{{ @$task->user->name }}</div>

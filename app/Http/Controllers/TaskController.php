@@ -23,7 +23,15 @@ class TaskController extends Controller
             if ($status || $status == "0"){
                 $q->whereStatus($status);
             }
-        })->whereUserId(Auth::user()->id)->paginate(10);
+        });
+        if(Auth::user()->role_as == 1){
+            $data['tasks'] = $data['tasks']->whereUserId(Auth::user()->id)->paginate(10);
+        }else{
+            $data['tasks'] = $data['tasks']->where('assigned_user_id', Auth::user()->id)->paginate(10);
+        }
+
+
+
 
         if (Auth::user()->role_as == 1)
         {
